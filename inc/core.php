@@ -323,9 +323,15 @@ function cmhello_users_sortable_columns($sortable_columns){
 add_action( 'pre_user_query','cmhello_users_search_order');
 function cmhello_users_search_order($obj){
     if(!isset($_REQUEST['orderby'])||$_REQUEST['orderby']=='reg_time'){
-        if(!in_array($_REQUEST['order'],array('asc','desc'))) $_REQUEST['order'] = 'desc';
+		if(array_key_exists('order',$_REQUEST)){
+			if(!in_array($_REQUEST['order'],array('asc','desc'))){
+				array_push($_REQUEST,'order','desc');
+			}
         $obj->query_orderby = "ORDER BY user_registered ".$_REQUEST['order']."";
-    }
+  	   }else{
+			$obj->query_orderby = "ORDER BY user_registered";
+		}
+	}
 }
 //Enable comments <img>
 function sig_allowed_html_tags_in_comments(){

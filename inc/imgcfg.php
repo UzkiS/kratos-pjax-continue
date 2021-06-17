@@ -52,7 +52,9 @@ function kratos_blog_thumbnail(){
     global $post;
     $img_id = get_post_thumbnail_id();
     $img_url = wp_get_attachment_image_src($img_id,'kratos-entry-thumb');
-    $img_url = $img_url[0];
+    if($img_url){
+        $img_url = $img_url[0];
+    }
     if(has_post_thumbnail()) echo '<a href="'.get_permalink().'"><img src="'.$img_url.'" alt="'.get_the_title().'"></a>';
 }
 add_filter('add_image_size',function(){return 1;});
@@ -61,7 +63,9 @@ function kratos_blog_thumbnail_new(){
     global $post;
     $img_id = get_post_thumbnail_id();
     $img_url = wp_get_attachment_image_src($img_id,'kratos-entry-thumb');
-    $img_url = $img_url[0];
+    if($img_url){
+        $img_url = $img_url[0];
+    }
     $title = get_the_title();
     if(has_post_thumbnail()){
         echo '<a href="'.get_permalink().'"><img src="'.$img_url.'" alt="'.$title.'"></a>';
@@ -86,7 +90,9 @@ function share_post_image(){
     if(has_post_thumbnail($post->ID)){
         $post_thumbnail_id = get_post_thumbnail_id( $post_id );
         $img = wp_get_attachment_image_src($post_thumbnail_id,'full');
+    if($img){
         $img = $img[0];
+    }
     }else{
         $content = $post->post_content;
         preg_match_all('/<img.*?(?: |\\t|\\r|\\n)?src=[\'"]?(.+?)[\'"]?(?:(?: |\\t|\\r|\\n)+.*?)?>/sim',$content,$strResult,PREG_PATTERN_ORDER);
