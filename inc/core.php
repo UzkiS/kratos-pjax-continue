@@ -137,8 +137,8 @@ remove_filter('wp_mail','wp_staticize_emoji_for_email');
 add_filter('emoji_svg_url','__return_false');
 add_filter('show_admin_bar','__return_false');
 add_action('wp_enqueue_scripts','mt_enqueue_scripts',1);
-add_filter('rest_enabled','_return_false');
-add_filter('rest_jsonp_enabled','_return_false');
+add_filter('rest_enabled','__return_false');
+add_filter('rest_jsonp_enabled','__return_false');
 function mt_enqueue_scripts(){wp_deregister_script('jquery');}
 function disable_embeds_init(){
     global $wp;
